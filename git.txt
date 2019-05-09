@@ -1,0 +1,74 @@
+基础：
+git clone 
+git status
+git add -u  git add -A  git add <file>  git rm <file>
+cat <file>  查看文件详情
+git diff  查看未提交的修改内容
+git commit -m'注释'
+git checkout --  <file> 撤销未暂存的修改
+git checkout . 撤销所有未暂存的修改
+git reset  [--hard] [file] 撤消已暂存的修改
+git pull
+git push -u origin <master>第一次(推送内容到master分支并且把本地master与远程master关联起来)
+git push
+git remote -v  查看远程信息
+git remote add origin https://xxx 添加远程版本库
+git --version
+git commit --amend 修改未push的最新commit
+暂存:
+git stash
+git stash save 'message'
+git stash apply
+git stash pop
+git stash list
+git stash clear
+git stash show -p [stash@{0}]
+版本：
+--soft 保留暂存区 工作区
+--mixed 保留工作区
+--hard 什么都不保留
+git log [file]  查看历史记录
+git reflog  查看历史记录的版本号id
+git show <版本号>   查看对应版本修改的变化  版本号为空，查看最近一次修改
+git checkout <版本号> file 回退文件到指定版本
+git reset [--hard] HEAD~n  回到前n个版本
+git reset [--hard]  <版本号>    回退到相应版本号
+标签：
+git tag  列出标签
+git tag <tagname> <version> 默认为head
+git tag -a <tagname> -m'message' <version>
+git show <tagname>
+git tag -d <tagname>
+git checkout <tagname>
+git push origin <tagname> 
+git push origin --tags
+git push origin --delete tag <tagname>
+分支：
+git branch 列出本地所有分支
+git branch -r 列出远程所有分支
+git branch -a  查看本地和远程所有分支
+git fetch [origin] [branchName] 可以获取远程所有更新
+git branch name  创建分支
+git checkout -切换到上一个分支
+git checkout name  切换分支
+git checkout -b name 创建+切换分支
+git merge name 合并某分支到当前分支
+git branch -d name 删除本地分支
+git push origin --delete name 删除远程分支
+git branch -vv  查看本地分支与远程分支的映射关系
+git branch -u origin/<romotebranch> 建立本地分支与远程分支的映射关系
+第一次：
+cd  项目
+git init 把当前目录变成git可以管理的仓库（.git目录）
+git add README.md  添加
+git commit -m "first commit"  提交
+git remote add origin https:xxxx   连接远程仓库地址
+git push -u origin master   推送内容到master分支并且把本地master与远程master关联起来
+配置：
+git config [--global] --list 显示git配置
+git config [--global] user.name  <name>
+git config [--global] user.email <email>
+git remote set-url origin <url> 修改远程仓库地址
+git config --global credential.helper store 长期存储密码
+
+          

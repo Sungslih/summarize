@@ -1,0 +1,59 @@
+1、Spring常用注解
+	@Configuration ：标注在类上，相当于spring的xml配置文件的<beans>,配置spring容器（应用上下文）
+	相当于	<?xml version="1.0" encoding="UTF-8"?>
+				<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+					xmlns:context="http://www.springframework.org/schema/context" xmlns:jdbc="http://www.springframework.org/schema/jdbc"  
+					xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+					xmlns:util="http://www.springframework.org/schema/util" xmlns:task="http://www.springframework.org/schema/task" xsi:schemaLocation="
+						http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+						http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+						http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.0.xsd
+						http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.0.xsd
+						http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+						http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd
+						http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.0.xsd" default-lazy-init="false">
+				</beans>
+	@MapperScan("com.lz.water.monitor.mapper") ：通过使用@MapperScan可以指定要扫描的Mapper类的包的路径
+	@PropertySource ：标注在类上表示引入配置文件
+	@Primary ：自动装配时当出现多个Bean候选者时，被注解为@Primary的Bean将作为首选者，否则将抛出异常
+	@RequestParam : 可以设置控制层参数的默认值，加上@RequestParam注解可以在路径上拼接上参数
+	@Bean @Bean注解主要是一个方法上的注解主要用在@Configuration注解的类上，也可以用在@Component注解的类里。添加的bean的id为方法名	
+		在配置文件中类似于<bean = "selectList" class = "com.js.TestSericeImpl"/>
+	@Aspect: 作用是把当前类标识为一个切面供容器读取	springboot创建切面类需要用此注解
+	@component （把普通pojo实例化到spring容器中，相当于配置文件中的<bean id="" class=""/>）当组件不好归类的时候，我们可以使用这个注解进行标注。    
+	@ConfigurationProperties 加在类上,需要和@Component注解  加到方法上通过@Bean的方式进行声明
+	@Pointcut("execution(* com.savage.aop.MessageSender.*(..))") Pointcut表示式(expression)	Spring_Aop编程使用@Pointcut来定义切点
+	@Around在spring——aop使用的应该是最多的。我们可以在切面逻辑中得到连接点的名字和所在类名。方便我们快速定位到系统中出现问题的地方。
+	@Component  //和sping整合的时候必须要这个注解，否则sping容器解析不到该切面导致切面不能工作
+	@PathVariable 
+		在@RequestMapping注解中定义URL变量规则
+		在@RequestMapping注解方法中获取URL变量-@PathVariable
+		@PathVariable指定URL变量名
+		定义多个URL变量
+		用正则表达式精确定义URL变量
+	@Aspect
+	public class AOPConfig {
+	    @Pointcut(value="execution(* spring.aop.Demo.*(..))")
+	    public void pointCut(){
+	    }		    
+	    @Around("pointCut()")
+	    public Object aroundMethod(ProceedingJoinPoint pjp) throws Throwable {
+	        Object ob = null;
+	        System.out.println(pjp.getSignature().getDeclaringType());   
+	        //通过pjp对象获取Signature对象，该对象封装了连接点的信息。比如通过getDeclaringType获取连接点所在类的  class对象
+	       //getName获取连接点的名称即方法名。
+	        System.out.println("---------------------------");
+	        pjp.proceed();
+	        System.out.println("---------------------------");	        
+	        return ob;		        
+	    }
+
+		
+		
+		
+	
+		
+		
+		
+		
+		
