@@ -19,8 +19,8 @@ git commit --amend 修改未push的最新commit
 git init
 git add .
 git commit -m ""
-git pull --rebase origin master :
-git push -u origin master 
+git pull --rebase origin master :首次提交GITHUB应该执行git pull --rebase origin master
+git push -u origin master ：首次提交应该执行 git push -u origin master 之后提交只需要git push
 暂存:
 git stash
 git stash save 'message'
