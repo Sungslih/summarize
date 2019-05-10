@@ -15,6 +15,12 @@ git remote -v  查看远程信息
 git remote add origin https://xxx 添加远程版本库
 git --version
 git commit --amend 修改未push的最新commit
+提交代码到github
+git init
+git add .
+git commit -m ""
+git pull --rebase origin master :
+git push -u origin master 
 暂存:
 git stash
 git stash save 'message'
