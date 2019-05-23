@@ -1,18 +1,50 @@
 为什么大多数人宁愿吃生活的苦，而不愿意吃学习的苦?因为学习的苦需要自己主动去吃，而生活的苦你躺着它就来了。
-X、拼接路径
+A、jar包和war包的区别
+     1、jar包就是别人已经写好的一些类，然后对这些类进行打包。可以将这些jar包引入到你的项目中，
+	    可以直接使用这些jar包中的类和属性，这些jar包一般放在lib目录下。
+	 2、war包是JavaWeb程序打的包，war包里面包括写的代码编译成的class文件，依赖的包，配置文件，
+	    所有的网站页面，包括html，jsp等等。一个war包可以理解为是一个web项目，里面是项目的所有东西。
+A、拼接路径
 	 ClassPathResource file = new ClassPathResource("img");
 	 String path = file.getFile().getAbsolutePath();
 	 cre.setIMG(path + File.separator + cre.getIMG());
-X、&&和||的区别
+A、&&和||的区别
 	 a&&b:若a为真（true），b为真（true），结果返回真（true），否则为假（false）
 	 a||b:a或b任意一个为真（true） 就返回真（true） ， 否则返回假（false）
-X、线程	 
+A、java的三元运算符
+	1、a>b?a:b;是什么意思？
+		?那个是java里唯一的三元运算符；？左边进行判断，右边进行取值
+		如果?前面的式子为真（true），就返回 ：左边的值否则返回右边的值
+A、java的位移运算符
+	 1、Int num = 10
+		num << 1; 是什么意思
+		<< 左移运算符 相当于num乘以2
+		num >> 1; 是什么意思
+		>> 右移运算符 相当于num除以2
+	 2、位异或运算（^）
+		运算规则是：两个数转为二进制，然后从高位开始比较，如果相同则为0，不相同则为1。
+		比如：8^11.
+		8转为二进制是1000，
+		11转为二进制是1011.
+		从高位开始比较得到的是：0011.
+		然后二进制转为十进制，就是Integer.parseInt("0011",2)=3;
+A、JSON格式F
+		方法JSONObject.fromObject(object)
+   JSONObject和JSONArray的数据表示形式
+	   JSONObject的数据是用 {  } 来表示的
+	   例如：   { "id" : "123", "courseID" : "huangt-test", "title" : "提交作业", "content" : null  } 
+	   
+	   而JSONArray，顾名思义是由JSONObject构成的数组，用  [ { } , { } , ......  , { } ]  来表示
+	   例如：[ {  "id" : "123", "courseID" : "huangt-test", "title" : "提交作业" }  ,  {  "content" : null, "beginTime" : 1398873600000  "endTime" } ] 
+	 
+	   可以看到一个很明显的区别，一个用的是 {  }  ，一个最外面用的是 [  ]  ；
+A、线程	 
 	线程的创建方式：
 		1）继承Thread类创建线程，重写run方法
 		2）实现Runnable接口创建线程，覆盖run方法
 		3）使用Callable接口创建线程，覆盖run方法
 		
-	X-1、进程和线程的区别
+	A-1、进程和线程的区别
 		 进程：是执行中一段程序，一旦程序被载入到内存并准备执行，他就是一个进程，进程时表示资源分配的
 			   一个基本概念，又是调度运行的基本单位，是系统中的并发执行的单位！！
 		 线程：单个进程中执行中每个任务就是一个线程，线程是进程执行运算的最小单位，一个线程只能属于一个进程
@@ -24,7 +56,7 @@ X、线程
 			   1、并行是指零个或者多个时间在同一时刻发生
 			   2、并行是在不同的实体上的多个事件，
 		 解释：在一台处理器上“同时”处理多个任务，在多台处理器上同时处理多个任务。如hadoop分布式集群
-	X-2、什么是进程和线程
+	A-2、什么是进程和线程
 			 以谷歌浏览器做例子，进程是大爷进程实际上是不做事的，而是吩咐别人做事，这个“别人”当然只有线程这位苦力了
 			 当一个程序（进程）想要做一件事， 比如刷新网页，他就会开启一个线程，让这个线程去做这件事。
 			 多线程前面提过，一个进程可以有多个线程。有一点要注意，一个进程至少要有一个线程。这也很好理解，没有线程就没有人“干活”了。
@@ -40,7 +72,7 @@ X、线程
 				堵塞：由于某种原因让某个线程让出CPU并停止自己的执行，即进入阻塞状态	
 				正在睡眠：调用sleep()方法让线程进入休眠状态，当指定的时间过去之后该线程重新进入就绪状态继续争夺时间片，线程不会释放对象锁
 				正在等待：调用wait()方法。（调用motify()方法回到就绪状态）必须调用notify()唤醒，线程会放弃对象锁
-	X-3、线程池
+	A-3、线程池
 			作用：如果并发的线程数量很多，并且每个线程都是执行一个时间很短的任务就结束了，这样频繁创建线程就会大大降低系统的效率，因为频繁创建线程和销毁线程需要时间。
 				  线程池使得线程可以复用，就是执行完一个任务，并不被销毁，而是可以继续执行其他的任务
 			好处：利用线程池管理并复用线程、控制最大并发数等。
@@ -73,8 +105,69 @@ X、线程
 						  }
 				BlockingQueue<Runnable>：阻塞队列，存储等待执行的任务。参数有ArrayBlockingQueue、LinkedBlockingQueue、SynchronousQueue可选。
 				ThreadFactory：线程工厂，用来创建线程
-				RejectedExecutionHandler：队列已满，而且任务量大于最大线程的异常处理策略。有以下取值		
-X、StringUtils  
+				RejectedExecutionHandler：队列已满，而且任务量大于最大线程的异常处理策略。有以下取值	
+A、Spring的常用注解	
+		1、Spring常用注解
+			@Configuration ：标注在类上，相当于spring的xml配置文件的<beans>,配置spring容器（应用上下文）
+			相当于	<?xml version="1.0" encoding="UTF-8"?>
+						<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+							xmlns:context="http://www.springframework.org/schema/context" xmlns:jdbc="http://www.springframework.org/schema/jdbc"  
+							xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+							xmlns:util="http://www.springframework.org/schema/util" xmlns:task="http://www.springframework.org/schema/task" xsi:schemaLocation="
+								http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+								http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+								http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.0.xsd
+								http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.0.xsd
+								http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+								http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd
+								http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.0.xsd" default-lazy-init="false">
+						</beans>
+			@MapperScan("com.lz.water.monitor.mapper") ：通过使用@MapperScan可以指定要扫描的Mapper类的包的路径
+			
+			@PropertySource ：标注在类上表示引入配置文件
+			
+			@Primary ：自动装配时当出现多个Bean候选者时，被注解为@Primary的Bean将作为首选者，否则将抛出异常
+			
+			@RequestParam : 可以设置控制层参数的默认值，加上@RequestParam注解可以在路径上拼接上参数
+			
+			@Bean @Bean注解主要是一个方法上的注解主要用在@Configuration注解的类上，也可以用在@Component注解的类里。添加的bean的id为方法名			
+			     	在配置文件中类似于<bean = "selectList" class = "com.js.TestSericeImpl"/>
+			@Aspect: 作用是把当前类标识为一个切面供容器读取	springboot创建切面类需要用此注解
+			
+			@component （把普通pojo实例化到spring容器中，相当于配置文件中的<bean id="" class=""/>）当组件不好归类的时候，我们可以使用这个注解进行标注。 
+			
+			@ConfigurationProperties 加在类上,需要和@Component注解  加到方法上通过@Bean的方式进行声明
+			
+			@Pointcut("execution(* com.savage.aop.MessageSender.*(..))") Pointcut表示式(expression)	Spring_Aop编程使用@Pointcut来定义切点
+			
+			@Around在spring——aop使用的应该是最多的。我们可以在切面逻辑中得到连接点的名字和所在类名。方便我们快速定位到系统中出现问题的地方。
+			
+			@Component  //和sping整合的时候必须要这个注解，否则sping容器解析不到该切面导致切面不能工作
+			
+			@PathVariable 
+				在@RequestMapping注解中定义URL变量规则
+				在@RequestMapping注解方法中获取URL变量-@PathVariable
+				@PathVariable指定URL变量名
+				定义多个URL变量
+				用正则表达式精确定义URL变量
+			@Aspect
+			public class AOPConfig {
+			    @Pointcut(value="execution(* spring.aop.Demo.*(..))")
+			    public void pointCut(){
+			    }		    
+			    @Around("pointCut()")
+			    public Object aroundMethod(ProceedingJoinPoint pjp) throws Throwable {
+			        Object ob = null;
+			        System.out.println(pjp.getSignature().getDeclaringType());   
+			        //通过pjp对象获取Signature对象，该对象封装了连接点的信息。比如通过getDeclaringType获取连接点所在类的  class对象
+			       //getName获取连接点的名称即方法名。
+			        System.out.println("---------------------------");
+			        pjp.proceed();
+			        System.out.println("---------------------------");	        
+			        return ob;		        
+			    }
+			
+A、StringUtils  
      Stirng str="123,456";	 
 	 StringUtils.isEmpty(str)//判断字符串是否为空，判断的标准是str==null,str.length()==0	 
 	 StringUtils.isNotEmpty(Str)//判断字符串是否非空，相当于！StringUtils.isEmpty(Str);
@@ -86,17 +179,57 @@ X、StringUtils
 	 str.split(",")//根据，把字符串分开，返回一个字符串数组
 	 str.trim()//去除字符串两边多余的空格
 	 str.toUpperCase()//转换大小写
-X-1、java中的关键字
+   JAVA方法
+     java中形参的可变参数的定义(如String... args)
+		 首先这是jdk1.5之后的新特性，我们叫它为可变参数，即  varargs 。 之前我们定义可变参数是采用String[] args的方法来声明。jdk1.5之后有了更加简便的方式。 
+		 事实上String[] args 和 String... args 本质上不没有什么区别，String... args 最后还是转化成String[] args 来做的，只是String... args这种形式在应用上更加的灵活和简便。
+	 例如：
+		 public static void callMe1(String[] args) {  
+			System.out.println(args.getClass() == String[].class);  
+			 for(String s : args) {  
+				System.out.println(s);  
+					}  
+				}  				  
+		public static void callMe2(String... args) {  
+			System.out.println(args.getClass() == String[].class);  
+			for(String s : args) {  
+				System.out.println(s);  
+			}  
+		}
+	 Text text=new Test();
+	 Class class=text.getClass():方法是获得调用该方法的对象的类,通过这个class可以调用Text中的方法和属性利用了反射的机制
+	 Integer.parseInt("0011",2)：转换二进制返回用十进制参数表示的整数值
+A-1、java中的关键字
 	 instanceof关键字，它的作用是判断其左边对象是否为其右边类的实例，返回的是boolean类型的数据。用它来判断某个对象是否是某个Class类的实例
-X、Springboot
+A、Springboot
 	  1、Springboot如何使用外部tomcat容器？
 		 https://www.cnblogs.com/wzk-0000/p/9505265.html
 	  2、Springboot使用dbcp连接池
 		 https://www.cnblogs.com/yi1036943655/p/9251425.html
-X、ArrayList 
-     根据源码注释可知，ArrayList是线程不安全的，
-	 多线程环境下要通过外部的同步策略后使用，比如List list = Collections.synchronizedList(new ArrayList(…));    
-X、JAVA 排序 Collections.sort()方法
+A、ArrayList 
+     1、根据源码注释可知，ArrayList是线程不安全的，
+	 2、为什么说ArrayList是线程不安全的？https://blog.csdn.net/u012859681/article/details/78206494 写的不错
+	    多线程环境下要通过外部的同步策略后使用，比如List list = Collections.synchronizedList(new ArrayList(…));   
+	 3、ArrayList的扩容机制https://blog.csdn.net/yz972641975/article/details/78662617
+						   https://blog.csdn.net/eases_stone/article/details/79843851 
+						   https://blog.csdn.net/zymx14/article/details/78324464 精
+   HashMap底层原理
+	 * HashMap是一个散列桶（数组加链表实现），储存方式是键值对映射；
+	 * HashMap采用了数组加链表数据结构，继承了数组的线性查找和链表的寻址修改
+	 * HashMap是非synchronized，所以HashMap很快，HashMap可以接受null键和值，而Hashtable则不能
+	 * HashMap是基于hashing的原理，我们使用put(key, value)存储对象到HashMap中
+	   使用get(key)从HashMap中获取对象。当我们给put()方法传递键和值时，我们先对
+	   键调用hashCode()方法，计算并返回的hashCode是用于找到Map数组的bucket位置来
+	   储存Node 对象。这里关键点在于指出，HashMap是在bucket中储存键对象和值对象，作为Map.Node 
+	   
+   红黑树五个特性：
+	(1) 每个节点或者是黑色，或者是红色。
+	(2) 根节点是黑色。
+	(3) 每个叶子节点是黑色。 [注意：这里叶子节点，是指为空的叶子节点！]
+	(4) 如果一个节点是红色的，则它的子节点必须是黑色的。
+	(5) 从一个节点到该节点的子孙节点的所有路径上包含相同数目的黑节点。
+	
+A、JAVA 排序 Collections.sort()方法
 	List<Integer> list=new ArrayList<>();
 	list.add(1);list.add(5);list.add(3);list.add(2);list.add(10);list.add(7);
 	Collections.sort(list);//升序
@@ -105,7 +238,7 @@ X、JAVA 排序 Collections.sort()方法
 	Collections.sort(list,Collections.reverseOrder());降序
 	System.out.println(list);//降序
 	
-X、Mybatis框架	
+A、Mybatis框架	
 	Mybatis的初始化
 		MyBatis的初始化的过程其实就是解析配置文件和初始化Configuration的过程	
 	Mybatis的主要成员
@@ -119,13 +252,15 @@ X、Mybatis框架
 		MappedStatement  ： MappedStatement维护一条<select|update|delete|insert>节点的封装
 		SqlSource        ： 负责根据用户传递的parameterObject，动态地生成SQL语句，将信息封装到BoundSql对象中，并返回
 		BoundSql         ： 表示动态生成的SQL语句以及相应的参数信息
-X-1、bean的生命周期
-	    1)通过构造方法创建或者工厂创建bean的实例
-		2)为bean的属性设置值和对其他bean的引用
-		3)调用bean的初始化方法
-		4)bean的使用
+	mapper for循环 ：。。。。	
+		
+	A-1、bean的生命周期
+			1)通过构造方法创建或者工厂创建bean的实例
+			2)为bean的属性设置值和对其他bean的引用
+			3)调用bean的初始化方法
+			4)bean的使用
 		5)bean的摧毁
-X、 Session介绍
+A、 Session介绍
 		在WEB开发中，服务器可以为每个用户浏览器创建一个会话对象（session对象），注意：一个浏览器独占一个session对象(默认情况下)。
 		因此，在需要保存用户数据时，服务器程序可以把用户数据写到用户浏览器独占的session中，当用户使用浏览器访问其它程序时，其它程
 		序可以从用户的session中取出该用户的数据，为用户服务
@@ -141,7 +276,7 @@ X、 Session介绍
     具体的使用场景
 	   当向Session中存取登录信息时，一般建议：HttpSession session =request.getSession();
 	   当从Session中获取登录信息时，一般建议：HttpSession session =request.getSession(false);
-Y、数据库
+B、数据库
 	一对一关系举例：
 		1、每个中国本土居民和他们唯一的身份证编号
 		2、每个班级中唯一的班长，每个班长也只服务于唯一的班级
@@ -155,7 +290,7 @@ Y、数据库
 	    对于多对多关系，需要转换成1对多关系，那么就需要一张中间表来转换，
 		这张中间表里面需要存放学生表里面的主键和课程表里面的主键，
 	    此时学生与中间表示1对多关系，课程与中间表是1对多关系，学生与课程是多对多关系
-Y-1 数据库索引 
+B-1 数据库索引 
 	 索引主要分为两大类：聚集索引和非聚集索引
 		 在这两大类的索引类型下，还可以降索引分为4个小类型：
 			1，普通索引：最基本的索引，没有任何限制，是我们经常使用到的索引。
@@ -185,26 +320,331 @@ Y-1 数据库索引
 		建议使用聚集索引的场合为：
 				  A.某列包含了小数目的不同值。
 				  B.排序和范围查找
-y-2	数据库为什么需要锁机制，都有哪些锁机制？ 
+B-2	数据库为什么需要锁机制，都有哪些锁机制？ 
 
      ①为什么要锁？
 		数据库是一个多用户使用的共享资源,比如一个用户表t_user,两个浏览器前面的人登录了同个一个账号
 		把电话号码改了。当多个用户并发地存取数据时，在数据库中就会产生多个事务同时存取同一数据的情况。
 		若对并发操作不加控制就可能会读取和存储不正确的数据，破坏数据库的一致性(脏读，不可重复读，幻读等)，
-		可能产生死锁。为了解决这个问题，加锁是一个非常重要的技术，对实现数据库并发控制是一个好的方案。
-		简单说当一个执行sql语句的事务想要操作表记录之前，先向数据库发出请求，对你访问的记录集加锁，
+		可能产生死锁。为了解决这个问题，加锁是一个非常重要的技术，对实现数据库并发控制是一个好的方案。		
+	答：简单说当一个执行sql语句的事务想要操作表记录之前，先向数据库发出请求，对你访问的记录集加锁，
 		在这个事务释放这个锁之前，其他事务不能对这些数据进行更新操作。
-		
+	 简单的说就是：当多个用户同时对数据库并发操作时，会带来数据不一致的问题，所以，锁主要用于多用户环境下保证数据库完整性和一致性。
 	 ②有哪些锁？
 	    锁包括行级锁、表级锁、悲观锁、乐观锁
+		
+	  (1)行级锁:
+	         一种它锁，防止另外事务修改此行;在使用以下语句时，Oracle会自动应用行级锁：INSERT、UPDATE、DELETE、SELECT语句
+	         允许用户一次锁定多条记录进行更新.使用commit或者rollback释放锁。MySql的innodb存储引擎默认是行级锁
+		 特点:开锁大，加锁慢；会出现死锁；锁定粒度最小，发生锁冲突的概率最低，并发度也最高。适合于有大量按索引更新少量不同数据，同时又有并发查询的应用，如一些在线事务处理系统。
+	  (2)表级锁	
+	         行级锁和表级锁是根据锁的粒度来区分的，行记录，表都是资源，锁是作用在这些资源上的。
+			 如果粒度比较小(比如行级锁)，可以增加系统的并发量但需要较大的系统开销，会影响到性能，出现死锁，
+			 因为粒度小则操作的锁的数量会增加;如果作用在表上，粒度大，开销小，维护的锁少，不会出现死锁，但是并发是相当昂贵的，
+			 因为锁定了整个表就限制了其它事务对这个表中其他记录的访问。
+	  (3)悲观锁
+			 正如其名，它指的是对数据被外界（包括本系统当前的其他事务，以及来自外部系统的事务处理）修改持保守悲观态度，
+			 事务每次去操作数据的时候都假设有其他事务会修改需要访问的数据，所以在访问之前都要求上锁，行锁，表锁等，读锁，写锁等，
+			 都是在做操作之前先上锁，因此，在整个数据处理过程中，将数据处于锁定状态。悲观锁的实现，往往依靠数据库提供
+			 的锁机制（也只有数据库层提供的锁机制才能 真正保证数据访问的排他性，否则，即使在本系统中实现了加锁机制，也无法保证外部系 统不会修改数据）。
+			 一个典型的倚赖数据库的悲观锁调用： select * from account where name=”Erica” for update 这条sql 语句锁定了account 表中所有符合检索条件（name=”Erica”）的记录。 
+			 本次事务提交之前（事务提交时会释放事务过程中的锁），外界无法修改这些记录。
+	  (4)乐观锁
+			 和悲欢锁相反，事务每次去操作数据之前，都假设其他事务不会修改这些需要访问的数据 ，所以 在访问之前不要求上锁，
+			 只是在进行更新修改操作的时候判断一下在访问的期间有没有其他人修改数据 了。它适用于多读的应用类型，冲突真的发生比较少的时候就比较好，
+			 这样省去了开销的开销，可以提高吞吐量;但如果是真的经常要发生冲突的，那每次还要去判断进行retry,反倒降低的性能，这个时候悲欢锁比较好。
+			 数据库如果提供类似于write_condition机制的其实都是提供的乐观锁。
+B-3	数据库中事务的四大特性（ACID）
+	 (1)原子性
+			不可分割的操作，要么都成功要么都失败回滚，因此事务的操作如果成功就必须要完全应用到数据库，如果操作失败则不能对数据库有任何影响。
+	 
+	 (2)一致性
+			一致性是指一个事务从执行之前和执行之后必须保证一致性的状态
+			举个例子：拿转账来说，假设用户A和用户B两者的钱加起来一共是5000，
+			          那么不管A和B之间如何转账，转几次账，事务结束后两个用户的钱相加起来应该还得是5000，这就是事务的一致性。
+			
+	 (3)隔离性
+			隔离性是指当多个用户并发访问数据库的时候，比如访问同一张表，数据库为每个用户开启事务，不能被其他的事务所干扰
+			即是：对于任意两个并发的事务T1和T2，在事务T1看来，T2要么在T1开始之前就已经结束，
+			      要么在T1结束之后才开始，这样每个事务都感觉不到有其他事务在并发地执行。
+	 
+	 (4)持久性
+			持久性就是指一个事务被提交了，必须应该是永久性的，即使数据库在发生故障的时候也不会丢失事务提交的操作
+			
+B-4	数据库事务的隔离性	
+		当多个线程都开启事务操作数据库中的数据时，数据库系统要能进行隔离操作，以保证各个线程获取数据的准确性，
+		在介绍数据库提供的各种隔离级别之前，我们先看看如果不考虑事务的隔离性，会发生的几种问题：
+	 (1)读已提交 
+			读提交，顾名思义，就是只能读到已经提交了的内容。
+            这是各种系统中最常用的一种隔离级别，也是SQL Server和Oracle的默认隔离级别。这种隔离级别能够有效的避免脏读，但除非在查询中显示的加锁，
+	 
+	 (2)读未提交	 
+			读未提交，顾名思义，就是可以读到未提交的内容。
+		    因此，在这种隔离级别下，查询是不会加锁的，也由于查询的不加锁，所以这种隔离级别的一致性是最差的，可能会产生“脏读”、“不可重复读”、“幻读”。
+	     	如无特殊情况，基本是不会使用这种隔离级别的。
+		
+	 (3)可重复度
+			可重复读，顾名思义，就是专门针对“不可重复读”这种情况而制定的隔离级别，自然，它就可以有效的避免“不可重复读”。而它也是MySql的默认隔离级别。
+			在这个级别下，普通的查询同样是使用的“快照读”，但是，和“读提交”不同的是，当事务启动时，就不允许进行“修改操作（Update）”了，
+			而“不可重复读”恰恰是因为两次读取之间进行了数据的修改，因此，“可重复读”能够有效的避免“不可重复读”，但却避免不了“幻读”，
+			因为幻读是由于“插入或者删除操作（Insert or Delete）”而产生的。   
+	 
+	 (4)串行化
+		    这是数据库最高的隔离级别，这种级别下，事务“串行化顺序执行”，也就是一个一个排队执行。
+			这种级别下，“脏读”、“不可重复读”、“幻读”都可以被避免，但是执行效率奇差，性能开销也最大，所以基本没人会用。
+	  
+C、 Redis数据库
+		优点：
+			① 数据库的工作模式按存储方式可分为：硬盘数据库和内存数据库。
+			  Redis 将数据储存在内存里面，读写数据的时候都不会受到硬盘 I/O 速度的限制，所以速度极快。
+			② Redis采用的是基于内存的采用的是单进程单线程模型的 KV 数据库，由C语言编写，
+			  官方提供的数据是可以达到100000+的QPS（每秒内查询次数）。这个数据不比采用单进程多线程的同样基于内存的 KV 数据库 Memcached 差
+		 redis是单线程
+D、 常用设计模式
+		参考博客：https://www.cnblogs.com/cenyu/p/6289209.html
+		代理模式：代理模式提供了对目标对象另外的访问方式
+			好处：可以在目标对象实现的基础上,增强额外的功能操作,即达到扩展目标对象的功能
+			
+		举个例子: 假设我们想邀请一位明星,那么并不是直接连接明星,而是联系明星的经纪人,来达到同样的目的
+				  明星就是一个目标对象,他只要负责活动中的节目,代理人存在的价值就是拦截我们对明星的直接访问！
+				  而其他琐碎的事情就交给他的代理人(经纪人)来解决.这就是代理思想
+		代理模式分为静态代理和动态代理：
+	D-1、静态代理代码示例:
+			//接口IUserDao
+			public interface IUserDao {
+					void save();
+				}
+				
+		    //目标对象:UserDaoImpl.java实现IUserDao接口
+			public class UserDaoImpl implements IUserDao {
+			public void save() {
+				System.out.println("----已经保存数据!----");
+				}
+			}
+			//静态代理对象
+			public class UserDaoProxy implements IUserDao{
+				//接收保存目标对象
+				private IUserDao target;
+				public UserDaoProxy(IUserDao target){
+					this.target=target;
+				}
 
-X Redis数据库
-	优点：
-		① 数据库的工作模式按存储方式可分为：硬盘数据库和内存数据库。
-		  Redis 将数据储存在内存里面，读写数据的时候都不会受到硬盘 I/O 速度的限制，所以速度极快。
-		② Redis采用的是基于内存的采用的是单进程单线程模型的 KV 数据库，由C语言编写，
-	      官方提供的数据是可以达到100000+的QPS（每秒内查询次数）。这个数据不比采用单进程多线程的同样基于内存的 KV 数据库 Memcached 差
-	 redis是单线程
+				public void save() {
+					System.out.println("开始事务...");
+					target.save();//执行目标对象的方法
+					System.out.println("提交事务...");
+				}
+            }
+			//测试类
+			public class App {
+				public static void main(String[] args) {
+					//目标对象
+					UserDaoImpl target = new UserDaoImpl();
+					//代理对象,把目标对象传给代理对象,建立代理关系
+					UserDaoProxy proxy = new UserDaoProxy(target);
+					proxy.save();//执行的是代理的方法
+				}
+			}
+		从代码可以看出静态代理可以从不修改目标对象的情况下，增加额外功能
+		缺点：因为代理对象需要与目标对象实现一样的接口,
+		      所以会有很多代理类,类太多.同时,一旦接口增加方法,目标对象与代理对象都要维护.
+		解决方式：使用动态代理
+	D-2、动态代理
+			特点：
+				① 动态代理不需要实现接口
+				② 代理对象的生成,是利用JDK的API,动态的在内存中构建代理对象(需要我们指定创建代理对象/目标对象实现的接口的类型)
+				③ 动态代理也叫做:JDK代理,接口代理
+		JDK动态代理：JDK1.5之后提供了一个"java.lang.reflect.Proxy"类，通过"Proxy"类提供的一个newProxyInstance方法用来创建一个对象的代理对象	
+					 完整的写法是:static Object newProxyInstance(ClassLoader loader, Class<?>[] interfaces,InvocationHandler h)
+					 newProxyInstance方法用来返回一个代理对象这个方法总共有三个参数
+					  1、ClassLoader loader,:用来指明生成代理对象使用哪个类装载器
+					  2、Class<?>[] interfaces,:用来指明生成哪个对象的代理对象
+					  3、InvocationHandler h:用来指明产生的这个代理对象要做什么事情
+		代码演示：
+				public class ProxyFactory{
+                    //维护一个目标对象
+					private Object target;
+					public ProxyFactory(Object target){
+						this.target=target;
+					}
+				   //给目标对象生成代理对象
+					public Object getProxyInstance(){
+						return Proxy.newProxyInstance(
+								target.getClass().getClassLoader(),
+								target.getClass().getInterfaces(),
+								new InvocationHandler() {
+								 * 在invoke方法编码指定返回的代理对象干的工作
+								 * proxy : 把代理对象自己传递进来 
+								 * method：把代理对象当前调用的方法传递进来 
+								 * args:把方法参数传递进来
+									@Override
+									public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+										System.out.println("开始事务2");
+										//执行目标对象方法
+										Object returnValue = method.invoke(target, args);
+										System.out.println("提交事务2");
+										return returnValue;
+									}
+								}
+						);
+					}
+                }
+	    Cglib动态代理
+			介绍：
+				① 静态代理和JDK动态代理都是要求目标对象实现一个接口的目标对象，而有时候目标对象只是一个单独的对象，并没有实现任何接口
+			      这个时候就可以使用以目标对象子类的方式类实现代理,这种方法就叫做:Cglib代理
+				  
+			    ② Cglib代理,也叫作子类代理,它是在内存中构建一个子类对象从而实现对目标对象功能的扩展.
+				
+	             * JDK的动态代理有一个限制,就是使用动态代理的对象必须实现一个或多个接口,如果想代理没有实现接口的类,就可以使用Cglib实现.
+				 
+				 * CGLIB是通过继承的方式做的动态代理，因此如果某个类被标记为final，那么它是无法使用CGLIB做动态代理的。
+				 
+				   Cglib是一个强大的高性能的代码生成包,它可以在运行期扩展java类与实现java接口.它广泛的被许多AOP的框架使用,例如Spring AOP和synaop,为他们提供方法的interception(拦截)
+				   Cglib包的底层是通过使用一个小而块的字节码处理框架ASM来转换字节码并生成新的类.不鼓励直接使用ASM,因为它要求你必须对JVM内部结构包括class文件的格式和指令集都很熟悉.
+	 
+	   代码演示：
+				//目标对象,没有实现任何接口
+				public class UserDao {
+					public void save() {
+						System.out.println("----已经保存数据!----");
+					}
+				}
+                //Cglib子类代理工厂
+				//对UserDao在内存中动态构建一个子类对象
+				public class ProxyFactory implements MethodInterceptor{
+						//维护目标对象
+						private Object target;
+
+						public ProxyFactory(Object target) {
+							this.target = target;
+						}
+
+						//给目标对象创建一个代理对象
+						public Object getProxyInstance(){
+							//1.工具类
+							Enhancer en = new Enhancer();
+							//2.设置父类
+							en.setSuperclass(target.getClass());
+							//3.设置回调函数
+							en.setCallback(this);
+							//4.创建子类(代理对象)
+							return en.create();
+
+						}
+
+						@Override
+						public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy) throws Throwable {
+							System.out.println("开始事务...");
+
+							//执行目标对象的方法
+							Object returnValue = method.invoke(target, args);
+
+							System.out.println("提交事务...");
+
+							return returnValue;
+						}
+					}
+	 
+	D-3、工厂模式	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
 	 
 	 
 	 
