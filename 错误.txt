@@ -26,6 +26,7 @@ springbot报错：
 	8、org.mybatis.spring.MyBatisSystemException: nested exception is org.apache.ibatis.binding.BindingException: Parameter 'genrn' not found
 		 org.mybatis.spring。MyBatisSystemException:嵌套异常是org.apache.ibatis.binding。BindingException:没有找到参数“genrn
 		解决: 忘了使用@Param。当只有一个参数时，Mapper中可以不使用，两个参数之上的话应该使用@Param注解
-
-
-
+	
+	9、跨域问题
+		配置完成跨域(CORS) 解决方案中，为什么 Access-Control-Allow-Methods 但是不起作用
+		解决：需要在启动类上加@ServletComponentScan注解
