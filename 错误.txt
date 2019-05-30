@@ -30,3 +30,8 @@ springbot报错：
 	9、跨域问题
 		配置完成跨域(CORS) 解决方案中，为什么 Access-Control-Allow-Methods 但是不起作用
 		解决：需要在启动类上加@ServletComponentScan注解
+	10、org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Cannot deserialize value of type `java.util.
+		问题描述： org.springframework.http.converter。HttpMessageNotReadableException: JSON解析错误:无法反序列化类型“java.util”的值
+	11、org.springframework.jdbc.UncategorizedSQLException: 
+        问题：Error updating database.  Cause: com.microsoft.sqlserver.jdbc.SQLServerException: “}”附近有语法错误。
+		解决：sql写错，这次为{}前面忘加#号应为#{}；

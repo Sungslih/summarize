@@ -25,6 +25,9 @@
 	@Pointcut("execution(* com.savage.aop.MessageSender.*(..))") Pointcut表示式(expression)	Spring_Aop编程使用@Pointcut来定义切点
 	@Around在spring——aop使用的应该是最多的。我们可以在切面逻辑中得到连接点的名字和所在类名。方便我们快速定位到系统中出现问题的地方。
 	@Component  //和sping整合的时候必须要这个注解，否则sping容器解析不到该切面导致切面不能工作
+	@ServletComponentScan //配置好跨域需要在启动类加此注解
+	在 SpringBootApplication 上使用@ServletComponentScan 注解后
+	Servlet、Filter、Listener 可以直接通过 @WebServlet、@WebFilter、@WebListener 注解自动注册，无需其他代码。
 	@PathVariable 
 		在@RequestMapping注解中定义URL变量规则
 		在@RequestMapping注解方法中获取URL变量-@PathVariable

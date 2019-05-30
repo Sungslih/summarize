@@ -4,6 +4,8 @@ A、jar包和war包的区别
 	    可以直接使用这些jar包中的类和属性，这些jar包一般放在lib目录下。
 	 2、war包是JavaWeb程序打的包，war包里面包括写的代码编译成的class文件，依赖的包，配置文件，
 	    所有的网站页面，包括html，jsp等等。一个war包可以理解为是一个web项目，里面是项目的所有东西。
+X、Linux
+	 常用Linux连接工具有：XShell、Putty、SecureCRT、等
 A、拼接路径
 	 ClassPathResource file = new ClassPathResource("img");
 	 String path = file.getFile().getAbsolutePath();
@@ -169,8 +171,16 @@ A、Spring的常用注解
 			
 A、StringUtils  
      Stirng str="123,456";	 
-	 StringUtils.isEmpty(str)//判断字符串是否为空，判断的标准是str==null,str.length()==0	 
-	 StringUtils.isNotEmpty(Str)//判断字符串是否非空，相当于！StringUtils.isEmpty(Str);
+	 StringUtils.isEmpty(str)//判断字符串是否为空，为空返回true，判断的标准是str==null,str.length()==0	 
+	 StringUtils.isNotEmpty(Str)//判断字符串是否非空，不为空返回true，相当于！StringUtils.isEmpty(Str);
+	 
+	 substring(int beginIndex)
+	 substring(int beginIndex, int endIndex)
+		 beginIndex -- 起始索引（包括）, 索引从 0 开始。
+		 endIndex -- 结束索引（不包括）。
+		 str.substring(2)表示字符串从下标2开始，输出以后的字段
+		 str.substring(2，4)表示截取字符串下标2(包括下标为2的数字)到下标4(不包括下表为4的字符)的数字
+		 
 	 str.startsWith("1")//表示判断参数字符串是否在原字符串的头部。
 	 str.endsWith("3")//表示判断参数字符串是否在原字符串的尾部。
 	 str.indexOf("1")//表示查找字符串1，第一次出现的位置，没有返回-1
@@ -179,6 +189,20 @@ A、StringUtils
 	 str.split(",")//根据，把字符串分开，返回一个字符串数组
 	 str.trim()//去除字符串两边多余的空格
 	 str.toUpperCase()//转换大小写
+     List list = new ArrayList();
+     list.isEmpty(); isEmpty()判断有没有元素 
+  
+	 
+A+ Objects
+	Object object=new Object();
+	 Objects.isEmpty(object); // 判断这个对象是否为空，为空则返回true
+  1、Collections.EMPTY_LIST 和 Collections.emptyList()的区别
+		Collections.EMPTY_LIST返回的是一个空的List。为什么需要空的List呢？有时候我们在函数中需要返回一个List，
+		但是这个List是空的，如果我们直接返回null的话，调用者还需要进行null的判断，所以一般建议返回一个空的List。
+		Collections.EMPTY_LIST返回的这个空的List是不能进行添加元素这类操作的。这时候你有可能会说，我直接返回一个new ArrayList()呗，
+		但是new ArrayList()在初始化时会占用一定的资源，所以在这种场景下，还是建议返回Collections.EMPTY_LIST。
+	    Collections. emptyList()返回的也是一个空的List，它与Collections.EMPTY_LIST的唯一区别是，
+	    Collections. emptyList()支持泛型，所以在需要泛型的时候，可以使用Collections. emptyList()。
    JAVA方法
      java中形参的可变参数的定义(如String... args)
 		 首先这是jdk1.5之后的新特性，我们叫它为可变参数，即  varargs 。 之前我们定义可变参数是采用String[] args的方法来声明。jdk1.5之后有了更加简便的方式。 
@@ -252,6 +276,20 @@ A、Mybatis框架
 		MappedStatement  ： MappedStatement维护一条<select|update|delete|insert>节点的封装
 		SqlSource        ： 负责根据用户传递的parameterObject，动态地生成SQL语句，将信息封装到BoundSql对象中，并返回
 		BoundSql         ： 表示动态生成的SQL语句以及相应的参数信息
+	resultMap 的使用总结：
+		<resultMap id="唯一的标识" type="映射的pojo对象">
+		  <id column="表的主键字段，或者可以为查询语句中的别名字段" jdbcType="字段类型" property="映射pojo对象的主键属性" />
+		  <result column="表的一个字段（可以为任意表的一个字段）" jdbcType="字段类型" property="映射到pojo对象的一个属性（须为type定义的pojo对象中的一个属性）"/>
+		  <association property="pojo的一个对象属性" javaType="pojo关联的pojo对象">
+			<id column="关联pojo对象对应表的主键字段" jdbcType="字段类型" property="关联pojo对象的主席属性"/>
+			<result  column="任意表的字段" jdbcType="字段类型" property="关联pojo对象的属性"/>
+		  </association>
+		  <!-- 集合中的property须为oftype定义的pojo对象的属性-->
+		  <collection property="pojo的集合属性" ofType="集合中的pojo对象">
+			<id column="集合中pojo对象对应的表的主键字段" jdbcType="字段类型" property="集合中pojo对象的主键属性" />
+			<result column="可以为任意表的字段" jdbcType="字段类型" property="集合中的pojo对象的属性" />  
+		  </collection>
+		</resultMap>
 	mapper for循环 ：。。。。	
 		
 	A-1、bean的生命周期
@@ -276,7 +314,26 @@ A、 Session介绍
     具体的使用场景
 	   当向Session中存取登录信息时，一般建议：HttpSession session =request.getSession();
 	   当从Session中获取登录信息时，一般建议：HttpSession session =request.getSession(false);
+	Session中的常用方法
+	  1、session.setAttribute():设定指定名字的属性的值，并将它添加到session会话范围内，如果这个属性是会话范围内存在，则更改该属性的值
+	  2、session.getAttribute(String name)在会话范围内获取指定名字的属性的值，返回值类型为object，如果该属性不存在，则返回null。
+	  3、session.removeAttribute(String name)，删除指定名字的session属性，若该属性不存在，则出现异常。
+	  4、session.getId( )，获取当前的会话ID。每个会话在服务器端都存在一个唯一的标示sessionID，session对象发送到浏览器的唯一数据就是sessionID，它一般存储在cookie中。
+	  5、public void setMaxInactiveInterval(int interval) 设置会话的最大持续时间，单位是秒，负数表明会话永不失效。  
+      6、public int getMaxInActiveInterval（）,获取会话的最大持续时间。  
+      7、使用session对象的getCreationTime()和getLastAccessedTime()方法可以获取会话创建的时间和最后访问的时间，但其返回值是毫秒，一般需要使用下面的转换来获取具体日期和时间。  
+		   Date creationTime = new Date(session.getCreationTime());  
+		   Date accessedTime = new Date(session.getLastAccessedTime());  
 B、数据库
+	数据库关键字：
+	limit：select * from test limit 10，查询前十行代码 mysql 
+	top；select * top 10 from test ，查询前10行代码 sqlserver
+	LEFT JOIN ON； select * from test t LEFT JOIN test2 t1 on t.id=t1.id 左连接
+	desc：倒序
+	asc：升序
+	order by ：select * from test order by time desc 根据时间倒叙查询
+	count(*)： SELECT COUNT(*) FROM table_name 函数返回表中的记录数
+	GROUP BY：分组 根据某个字段分组
 	一对一关系举例：
 		1、每个中国本土居民和他们唯一的身份证编号
 		2、每个班级中唯一的班长，每个班长也只服务于唯一的班级
@@ -553,7 +610,11 @@ D、 常用设计模式
 	 
 	 
 	 
-	 
+	    现在的人啊...！
+		每天吃着10块钱的盒饭，却去打赏身价百万千万的主播...
+		一年不给父母买件衣服，却去学人家爱狗人士彰显自己的爱心...！
+		住着三五百的出租屋不好好工作，却整天想着开跑车泡美妞...！
+		路上遇到了小偷都不敢吱声，却整天在这里叫嚣着犯我中华者，虽远必诛...！
 	 
 	 
 	 
